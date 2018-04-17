@@ -12,8 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('index')->with('title', 'ГеймсМаркет - Главная');
 });
+Route::get('/about', function () {
+    return view('about')->with('title', 'ГеймсМаркет - О компании');
+});
+
 
 Auth::routes();
 
