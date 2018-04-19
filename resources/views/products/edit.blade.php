@@ -1,4 +1,4 @@
-Создание товара
+Редактирование товара
 
 @if($errors)
 <ul>
@@ -9,22 +9,22 @@
 @endif
 
 
-<form action="/products/store" method="POST" enctype="multipart/form-data">
+<form action="/products/update/{{$product->id}}" method="POST" enctype="multipart/form-data">
     {{csrf_field()}}
     <label>
         Название товара
-        <input type="text" name="name">
+        <input type="text" name="name" value="{{$product->name}}">
     </label>
     <br>
 
-    <input type="hidden" name="category_id" id="category_id" value="">
+    <input type="hidden" name="category_id" id="category_id" value="{{$product->category_id}}">
 
     <label>
         Категория
         <select name="category_name" id="categories" onchange="catChange(this)">
             <option value="">-Выберите категорию-</option>
             @foreach ($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
+            <option value="{{$category->id}}" @if ($category->id==$product->category_id) selected @endif>{{$category->name}}</option>
             @endforeach
         </select>
     </label>
@@ -32,13 +32,13 @@
 
     <label>
         Цена
-        <input type="text" name="price">
+        <input type="text" name="price" value="{{$product->price}}">
     </label>
     <br>
 
     <label>
         Описание
-        <input type="text" name="description">
+        <input type="text" name="description" value="{{$product->description}}">
     </label>
     <br>
 
