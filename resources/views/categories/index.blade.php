@@ -3,6 +3,12 @@
         border: 1px solid;
         border-collapse: collapse;
     }
+    th {
+        background-color: #dddddd;
+    }
+    th, td {
+        padding: 4px;
+    }
 </style>
 
 @if ($allowControls)
@@ -22,14 +28,14 @@
     </tr>
     @foreach ($categories as $category)
         <tr>
-            <th>{{$category->id}}</th>
-            <th>{{$category->name}}</th>
-            <th>{{$category->description}}</th>
+            <td>{{$category->id}}</td>
+            <td>{{$category->name}}</td>
+            <td>{{$category->description}}</td>
             @if ($allowControls)
-            <th>
+            <td>
                 <a href="/categories/edit/{{$category->id}}">Edit</a>
                 <a href="/categories/destroy/{{$category->id}}">Delete</a>
-            </th>
+            </td>
             @endif
         </tr>
     @endforeach

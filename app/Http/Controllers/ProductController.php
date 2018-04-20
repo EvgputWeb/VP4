@@ -45,12 +45,13 @@ class ProductController extends Controller
         $product->save();
 
         $file = $request->file('image');
-        $imageName = 'game-' . $product->id . '-' . time() . '.jpg';
-        $file->move('./img/cover', $imageName);
-
-        $prod = Product::find($product->id);
-        $prod->image_name = $imageName;
-        $prod->save();
+        if (!empty($file)) {
+            $imageName = 'game-' . $product->id . '-' . time() . '.jpg';
+            $file->move('./img/cover', $imageName);
+            $prod = Product::find($product->id);
+            $prod->image_name = $imageName;
+            $prod->save();
+        }
 
         return redirect('/products');
     }
@@ -88,8 +89,27 @@ class ProductController extends Controller
         return redirect('/products');
     }
 
+    public function destroy($prod_id)
+    {
+        if (!Auth::user()->is_admin) {
+            return redirect('/products');
+        }
+        Product::destroy($prod_id);
+        return redirect('/products');
+    }
 
 
+    public function details($prod_id)
+    {
+        $prod = Product::find($prod_id);
+        $data = [
+            'product' => $prod,
+            'title' => 'ГеймсМаркет - Описание товара: '.$prod->name,
+            'categories' => Category::all(),
+            'products' => Product::all()
+        ];
+        return view('product', $data);
+    }
 
 
 }

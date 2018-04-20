@@ -52,7 +52,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/products/store', 'ProductController@store');
     Route::get('/products/edit/{prod_id}', 'ProductController@edit');
     Route::post('/products/update/{prod_id}', 'ProductController@update');
+    Route::get('/products/destroy/{prod_id}', 'ProductController@destroy');
 
 });
 
+Route::get('/product/details/{prod_id}', 'ProductController@details');
+Route::post('/user/info', 'UserController@info');
 Route::post('/orders/new', 'OrderController@store');

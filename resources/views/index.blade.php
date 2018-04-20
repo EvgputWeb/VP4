@@ -27,7 +27,16 @@
             </div>
             <div class="products-columns__item__thumbnail">
                 <a href="/product/details/{{$product->id}}" class="products-columns__item__thumbnail__link">
-                    <img src="img/cover/{{$product->image_name}}" alt="Preview-image" class="products-columns__item__thumbnail__img">
+                    @php
+                        $imgFile = 'img/cover/logo.png';
+                        if (!empty($product->image_name)) { $imgFile = 'img/cover/' . $product->image_name; }
+                    @endphp
+                    @if(file_exists($imgFile))
+                        <img src="{{$imgFile}}" alt="Preview-image" class="products-columns__item__thumbnail__img">
+                    @else
+                        <img src="img/cover/logo.png" alt="Preview-image" class="products-columns__item__thumbnail__img">
+                    @endif
+
                 </a>
             </div>
             <div class="products-columns__item__description">
