@@ -1,4 +1,4 @@
-Создание товара
+<h1>Создание товара</h1>
 
 @if($errors)
 <ul>
@@ -37,8 +37,8 @@
     <br>
 
     <label>
-        Описание
-        <input type="text" name="description">
+        Описание<br>
+        <textarea rows="7" cols="50" name="description"></textarea>
     </label>
     <br>
 
@@ -52,6 +52,13 @@
     <input type="submit">
 
 </form>
+
+<br>
+<br>
+<a href="/products">Товары >></a>
+<br>
+<br>
+<a href="/home">Dashboard >></a>
 
 
 <script>

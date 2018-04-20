@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('buyer_name');
             $table->string('buyer_email');
             $table->timestamps();
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

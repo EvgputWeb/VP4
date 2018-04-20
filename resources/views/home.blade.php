@@ -15,6 +15,16 @@
                     @endif
 
                     You are logged in!
+
+                    @if ($isAdmin)
+                        <div style="padding-top:30px;">
+                            <a href="/categories">Категории</a> &nbsp;&nbsp;&nbsp;
+                            <a href="/products">Товары</a> &nbsp;&nbsp;&nbsp;
+                            <a href="/orders">Заказы</a>
+                        </div>
+                    @endif
+
+
                 </div>
             </div>
         </div>

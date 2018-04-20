@@ -35,7 +35,11 @@ class ProductController extends Controller
             return redirect('/products');
         }
         $this->validate($request, [
-            'category_id' => 'required'
+            'name' => 'required',
+            'category_id' => 'required',
+            'price' => 'required',
+            'description' => 'required|max:700',
+            'image' => 'image'
         ]);
         $product = new Product();
         $product->name = $request->name;
@@ -73,6 +77,13 @@ class ProductController extends Controller
         if (!Auth::user()->is_admin) {
             return redirect('/products');
         }
+        $this->validate($request, [
+            'name' => 'required',
+            'category_id' => 'required',
+            'price' => 'required',
+            'description' => 'required|max:700',
+            'image' => 'image'
+        ]);
         $product = Product::find($prod_id);
         $product->name = $request->name;
         $product->category_id = $request->category_id;
@@ -104,9 +115,9 @@ class ProductController extends Controller
         $prod = Product::find($prod_id);
         $data = [
             'product' => $prod,
-            'title' => 'ГеймсМаркет - Описание товара: '.$prod->name,
+            'title' => 'ГеймсМаркет - ' . $prod->name,
             'categories' => Category::all(),
-            'products' => Product::all()
+            'products' => Product::all()->random(3)
         ];
         return view('product', $data);
     }

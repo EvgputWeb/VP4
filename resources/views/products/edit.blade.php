@@ -1,4 +1,4 @@
-Редактирование товара
+<h1>Редактирование товара</h1>
 
 @if($errors)
 <ul>
@@ -37,10 +37,11 @@
     <br>
 
     <label>
-        Описание
-        <input type="text" name="description" value="{{$product->description}}">
+        Описание<br>
+        <textarea rows="7" cols="50" name="description">{{$product->description}}</textarea>
     </label>
     <br>
+
 
     <label>
         Изображение
@@ -52,6 +53,15 @@
     <input type="submit">
 
 </form>
+
+
+<br>
+<br>
+<a href="/products">Товары >></a>
+<br>
+<br>
+<a href="/home">Dashboard >></a>
+
 
 
 <script>

@@ -3,10 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Order;
+
 
 class OrderController extends Controller
 {
+    public function index()
+    {
+        if (!Auth::user()->is_admin) {
+            return redirect('/');
+        }
+        $data = [
+            'orders' => Order::all(),
+        ];
+        return view('orders.index', $data);
+    }
+
+
     public function store(Request $request)
     {
         if ((empty($request->buyer_name)) || (empty($request->buyer_email))) {

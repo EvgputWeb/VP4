@@ -59,3 +59,4 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/product/details/{prod_id}', 'ProductController@details');
 Route::post('/user/info', 'UserController@info');
 Route::post('/orders/new', 'OrderController@store');
+Route::get('/orders/', 'OrderController@index');

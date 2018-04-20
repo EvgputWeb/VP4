@@ -31,6 +31,10 @@ class CategoryController extends Controller
         if (!Auth::user()->is_admin) {
             return redirect('/categories');
         }
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+        ]);
         $cat = new Category();
         $cat->name = $request->get('name');
         $cat->description = $request->get('description');
@@ -54,6 +58,10 @@ class CategoryController extends Controller
         if (!Auth::user()->is_admin) {
             return redirect('/categories');
         }
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+        ]);
         $cat = Category::find($cat_id);
         $cat->name = $request->name;
         $cat->description = $request->description;

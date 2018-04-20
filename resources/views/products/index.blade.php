@@ -9,11 +9,23 @@
     th, td {
         padding: 4px;
     }
+    .topbar {
+        padding: 15px 0;
+    }
+    #create {
+        border:1px solid green;
+        padding: 5px;
+        font-weight: bold;
+        text-decoration: none;
+        background-color: #d4ffc3;
+    }
 </style>
+
+<h1>Список товаров</h1>
 
 @if ($allowControls)
 <div class="topbar">
-    <a href="/products/create">New product</a>
+    <a href="/products/create" id="create">Создать товар</a>
 </div>
 @endif
 
@@ -47,5 +59,10 @@
 </table>
 
 @if ($products->count() == 0)
-    No products
+    Нет товаров
 @endif
+
+<br>
+<br>
+<a href="/home">Dashboard >></a>
+

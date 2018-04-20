@@ -9,11 +9,23 @@
     th, td {
         padding: 4px;
     }
+    .topbar {
+        padding: 15px 0;
+    }
+    #create {
+        border:1px solid green;
+        padding: 5px;
+        font-weight: bold;
+        text-decoration: none;
+        background-color: #d4ffc3;
+    }
 </style>
+
+<h1>Список категорий</h1>
 
 @if ($allowControls)
 <div class="topbar">
-    <a href="/categories/create">Create</a>
+    <a href="/categories/create" id="create">Создать категорию</a>
 </div>
 @endif
 
@@ -43,5 +55,10 @@
 </table>
 
 @if ($categories->count() == 0)
-    No categories
+    Нет категорий
 @endif
+
+<br>
+<br>
+<a href="/home">Dashboard >></a>
+
