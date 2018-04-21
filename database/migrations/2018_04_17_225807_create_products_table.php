@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->string('name');
             $table->decimal('price', 15, 2)->default(0);
-            $table->string('description',700)->nullable->default(null);
-            $table->string('image_name')->nullable->default(null);
+            $table->string('description',700)->nullable()->default(null);
+            $table->string('image_name')->nullable()->default(null);
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories');
         });
