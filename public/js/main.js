@@ -29,7 +29,7 @@ $('body').on('click', 'a[href*="/product/buy"]', function(e) {
             confirmButtonText: 'Заказать',
             cancelButtonText: 'Отмена',
             html:
-            '<h2 style="margin-top: 0; margin-bottom: 20px; color: #F44336;">' + gamename + '</h2>' +
+            '<h2 style="margin-top: 0; margin-bottom: 20px; color: #bf60b7;">' + gamename + '</h2>' +
             '<label>Ваше имя: <input id="swal-input-name" class="swal2-input" placeholder="Ваше имя" required></label>' +
             '<label>Ваш e-mail: <input id="swal-input-email" class="swal2-input" placeholder="Ваше e-mail" required></label>',
             preConfirm: function () {

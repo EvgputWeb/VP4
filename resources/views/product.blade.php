@@ -57,7 +57,6 @@
 
     @include('layouts.prodlist')
 
-
 </div>
 
 <div class="content-footer__container">

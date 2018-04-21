@@ -27,7 +27,8 @@ Route::get('/', function () {
 Route::get('/about', function () {
     $data = [
         'title' => 'ГеймсМаркет - О компании',
-        'categories' => Category::all()
+        'categories' => Category::all(),
+        'products' => Product::all()->random(3)
     ];
     return view('about', $data);
 });
@@ -56,6 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+Route::get('/category/{cat_id}', 'CategoryController@content');
 Route::get('/product/details/{prod_id}', 'ProductController@details');
 Route::post('/user/info', 'UserController@info');
 Route::post('/orders/new', 'OrderController@store');

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Order;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailable;
 
 
 class OrderController extends Controller
@@ -36,9 +38,11 @@ class OrderController extends Controller
         $order->buyer_name = $request->buyer_name;
         $order->buyer_email = $request->buyer_email;
         $order->save();
+
+        // Отсылаем e-mail на адрес, указанный в базе в настройках
+        Mail::to('evgputweb@yandex.ru')->send(new SendMailable($order));
+
         return json_encode(['result' => 'success'], JSON_UNESCAPED_UNICODE);
-        // TODO:
-        // Отослать e-mail на адрес, указанный в базе в настройках
     }
 
 }

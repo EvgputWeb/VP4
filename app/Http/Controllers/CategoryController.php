@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -76,6 +77,19 @@ class CategoryController extends Controller
         }
         Category::destroy($cat_id);
         return redirect('/categories');
+    }
+
+
+    public function content($cat_id)
+    {
+        $category = Category::find($cat_id);
+        $data = [
+            'category' => $category,
+            'title' => 'ГеймсМаркет - ' . $category->name,
+            'categories' => Category::all(),
+            'products' => Product::where('category_id','=', $category->id)->get()
+        ];
+        return view('category', $data);
     }
 
 }
