@@ -55,6 +55,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/products/update/{prod_id}', 'ProductController@update');
     Route::get('/products/destroy/{prod_id}', 'ProductController@destroy');
 
+    Route::get('/settings/', 'SettingsController@index');
+    Route::post('/settings/store', 'SettingsController@store');
 });
 
 Route::get('/category/{cat_id}', 'CategoryController@content');

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Order;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
+use App\Settings;
 
 
 class OrderController extends Controller
@@ -40,7 +41,12 @@ class OrderController extends Controller
         $order->save();
 
         // Отсылаем e-mail на адрес, указанный в базе в настройках
-        Mail::to('evgputweb@yandex.ru')->send(new SendMailable($order));
+        $ordersInfoEmail = Settings::where('key','=', 'orders_info_email')->get(['value'])->toArray();
+        (empty($ordersInfoEmail)) ? ( $ordersInfoEmail = '' ) : ( $ordersInfoEmail = (string)$ordersInfoEmail[0]['value'] );
+
+        if (!empty($ordersInfoEmail)) {
+            //Mail::to($ordersInfoEmail)->send(new SendMailable($order));
+        }
 
         return json_encode(['result' => 'success'], JSON_UNESCAPED_UNICODE);
     }
