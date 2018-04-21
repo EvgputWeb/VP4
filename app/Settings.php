@@ -8,6 +8,7 @@ class Settings extends Model
 {
     protected $table = 'settings';
     public $timestamps = false;
-    protected $fillable = ['key','value'];
-
+    protected $fillable = ['value'];
+    protected $primaryKey = 'key';
+    public $incrementing = false;
 }

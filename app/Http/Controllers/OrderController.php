@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
 use App\Settings;
 
-
 class OrderController extends Controller
 {
     public function index()
@@ -41,14 +40,13 @@ class OrderController extends Controller
         $order->save();
 
         // Отсылаем e-mail на адрес, указанный в базе в настройках
-        $ordersInfoEmail = Settings::where('key','=', 'orders_info_email')->get(['value'])->toArray();
-        (empty($ordersInfoEmail)) ? ( $ordersInfoEmail = '' ) : ( $ordersInfoEmail = (string)$ordersInfoEmail[0]['value'] );
+        $ordersInfoEmail = Settings::where('key', '=', 'orders_info_email')->get(['value'])->toArray();
+        (empty($ordersInfoEmail)) ? ($ordersInfoEmail = null) : ($ordersInfoEmail = (string)$ordersInfoEmail[0]['value']);
 
         if (!empty($ordersInfoEmail)) {
-            //Mail::to($ordersInfoEmail)->send(new SendMailable($order));
+            Mail::to($ordersInfoEmail)->send(new SendMailable($order));
         }
 
         return json_encode(['result' => 'success'], JSON_UNESCAPED_UNICODE);
     }
-
 }

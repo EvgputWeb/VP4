@@ -8,15 +8,14 @@ use App\Settings;
 
 class SettingsController extends Controller
 {
-
     public function index()
     {
         if (!Auth::user()->is_admin) {
             return redirect('/');
         }
         $key = 'orders_info_email';
-        $value = Settings::where('key','=',$key)->get(['value'])->toArray();
-        (empty($value)) ? ( $value = '' ) : ( $value = (string)$value[0]['value'] );
+        $value = Settings::where('key', '=', $key)->get(['value'])->toArray();
+        (empty($value)) ? ($value = '') : ($value = (string)$value[0]['value']);
         $data = [
             $key => $value
         ];
@@ -29,13 +28,16 @@ class SettingsController extends Controller
             return redirect('/');
         }
         $key = 'orders_info_email';
-
-        $setting = new Settings();
-        $setting->key = $key;
-        $setting->value = $request->get($key);
-        $setting->save();
+        $setting = Settings::find($key);
+        if (empty($setting)) {
+            $setting = new Settings();
+            $setting->key = $key;
+            $setting->value = $request->get($key);
+            $setting->save();
+        } else {
+            $setting->value = $request->get($key);
+            $setting->save();
+        }
         return redirect('/settings');
     }
-
-
 }

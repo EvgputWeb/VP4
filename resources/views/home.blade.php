@@ -20,7 +20,8 @@
                         <div style="padding-top:30px;">
                             <a href="/categories">Категории</a> &nbsp;&nbsp;&nbsp;
                             <a href="/products">Товары</a> &nbsp;&nbsp;&nbsp;
-                            <a href="/orders">Заказы</a>
+                            <a href="/orders">Заказы</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="/settings">Настройки</a>
                         </div>
                     @endif
 
