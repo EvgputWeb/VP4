@@ -14,10 +14,11 @@
                     if (!empty($product->image_name)) { $imgFile = 'img/cover/' . $product->image_name; }
                 @endphp
                 @if (file_exists(public_path($imgFile)))
-                    <img src="{{ asset($imgFile) }}" alt="Preview-image" class="products-columns__item__thumbnail__img">
+                    <img src="{{ asset($imgFile) }}" alt="{{$product->name}}" class="products-columns__item__thumbnail__img">
                 @else
-                    <img src="{{ asset('img/cover/logo.png') }}" alt="Preview-image" class="products-columns__item__thumbnail__img">
+                    <img src="{{ asset('img/cover/logo.png') }}" alt="{{$product->name}}" class="products-columns__item__thumbnail__img">
                 @endif
+
             </a>
         </div>
         <div class="products-columns__item__description">

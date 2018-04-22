@@ -6,6 +6,8 @@ use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 class ProductController extends Controller
 {
@@ -51,7 +53,7 @@ class ProductController extends Controller
         $file = $request->file('image');
         if (!empty($file)) {
             $imageName = 'game-' . $product->id . '-' . time() . '.jpg';
-            $file->move('./img/cover', $imageName);
+            copy($file, $_SERVER['DOCUMENT_ROOT'] . '/img/cover/' . $imageName);
             $prod = Product::find($product->id);
             $prod->image_name = $imageName;
             $prod->save();
@@ -93,7 +95,7 @@ class ProductController extends Controller
         $file = $request->file('image');
         if (!empty($file)) {
             $imageName = 'game-' . $product->id . '-' . time() . '.jpg';
-            $file->move('./img/cover', $imageName);
+            copy($file, $_SERVER['DOCUMENT_ROOT'] . '/img/cover/' . $imageName);
             $product->image_name = $imageName;
         }
         $product->save();
@@ -113,11 +115,12 @@ class ProductController extends Controller
     public function details($prod_id)
     {
         $prod = Product::find($prod_id);
+        $count = Product::count();
         $data = [
             'product' => $prod,
             'title' => 'ГеймсМаркет - ' . $prod->name,
             'categories' => Category::all(),
-            'products' => Product::all()->random(3)
+            'products' => Product::all()->random(min(3, $count))
         ];
         return view('product', $data);
     }
